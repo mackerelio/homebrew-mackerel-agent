@@ -2,7 +2,7 @@ require 'formula'
 
 class MackerelAgent < Formula
   homepage 'https://github.com/mackerelio/mackerel-agent'
-  url 'https://github.com/mackerelio/mackerel-agent.git', :branch => 'os-darwin'
+  head 'https://github.com/mackerelio/mackerel-agent.git'
 
   depends_on 'go' => :build
   depends_on 'git' => :build
