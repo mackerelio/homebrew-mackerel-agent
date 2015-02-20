@@ -1,21 +1,31 @@
-require 'formula'
-
 class MackerelAgent < Formula
   homepage 'https://github.com/mackerelio/mackerel-agent'
   head 'https://github.com/mackerelio/mackerel-agent.git'
+  url 'https://github.com/mackerelio/mackerel-agent/releases/download/v0.14.1/mackerel-agent_darwin_386.zip'
+  version '0.14.1'
+  sha1 '9a0d0fda33af66c0b39239b10800e09357cdf6bc'
 
   depends_on 'go' => :build
   depends_on 'git' => :build
+  depends_on 'hg' => :build
 
   def install
-    ENV['GOPATH'] = buildpath/'.go'
-    mkdir_p buildpath/'.go/src/github.com/mackerelio'
-    ln_s buildpath, buildpath/'.go/src/github.com/mackerelio/mackerel-agent'
-    system 'go', 'get', '-d'
-    system 'go', 'build', '-o', 'mackerel-agent'
-    bin.install 'mackerel-agent'
-    etc.install 'mackerel-agent.conf'
+    if build.head?
+      ENV['GOPATH'] = buildpath/'.go'
+      mkdir_p buildpath/'.go/src/github.com/mackerelio'
+      ln_s buildpath, buildpath/'.go/src/github.com/mackerelio/mackerel-agent'
+      system 'make', 'build'
+      bin.install 'build/mackerel-agent'
+      etc.install 'mackerel-agent.conf'
+    else
+      bin.install 'mackerel-agent'
+      etc.install 'mackerel-agent.conf'
+    end
     mkdir_p "#{var}/mackerel-agent"
+  end
+
+  test do
+    system 'mackerel-agent', '-version'
   end
 
   plist_options :manual => "mackerel-agent -conf #{HOMEBREW_PREFIX}/etc/mackerel-agent.conf"
