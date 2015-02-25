@@ -1,9 +1,9 @@
 homebrew-mackerel-agent
 =======================
 
-homebrew tap to install mackerel-agent (unofficial)
+homebrew tap to install mackerel-agent
 
 ```
-% brew tap motemen/mackerel-agent
+% brew tap mackerelio/mackerel-agent
 % brew install --HEAD mackerel-agent
 ```
