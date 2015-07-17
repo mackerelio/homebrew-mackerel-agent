@@ -7,3 +7,10 @@ homebrew tap to install mackerel-agent
 % brew tap mackerelio/mackerel-agent
 % brew install mackerel-agent
 ```
+
+and mkr
+
+```
+% brew install mkr
+```
+
