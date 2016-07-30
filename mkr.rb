@@ -1,7 +1,7 @@
 class Mkr < Formula
   homepage 'https://github.com/mackerelio/mkr'
   version '0.11.3'
-  if Hardware.is_64_bit?
+  if Hardware::CPU.is_64_bit?
     url 'https://github.com/mackerelio/mkr/releases/download/v0.11.3/mkr_darwin_amd64.zip'
     sha256 'bd29ec6c00266319e28767cd4c442a5b8385f78774c68e8853cce7512687b24c'
   else
