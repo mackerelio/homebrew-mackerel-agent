@@ -1,7 +1,7 @@
 class MackerelAgent < Formula
   homepage 'https://github.com/mackerelio/mackerel-agent'
   version '0.32.2'
-  if Hardware.is_64_bit?
+  if Hardware::CPU.is_64_bit?
     url 'https://github.com/mackerelio/mackerel-agent/releases/download/v0.32.2/mackerel-agent_darwin_amd64.zip'
     sha256 'a8c12efdd18e8f0a97653f3a3435cd730fcba929db107a73196c34a7f387b764'
   else
