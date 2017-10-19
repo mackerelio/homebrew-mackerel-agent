@@ -49,6 +49,7 @@ class MackerelAgent < Formula
      <key>ProgramArguments</key>
      <array>
          <string>#{opt_bin}/mackerel-agent</string>
+         <string>supervise</string>
          <string>-conf</string>
          <string>#{etc}/mackerel-agent.conf</string>
      </array>
