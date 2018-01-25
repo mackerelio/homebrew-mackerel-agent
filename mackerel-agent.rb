@@ -37,7 +37,7 @@ class MackerelAgent < Formula
 
   plist_options :manual => "mackerel-agent -conf #{HOMEBREW_PREFIX}/etc/mackerel-agent.conf"
 
-  def plist; <<-EOS.undent
+  def plist; <<~EOS
    <?xml version="1.0" encoding="UTF-8"?>
    <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
    <plist version="1.0">
@@ -64,7 +64,7 @@ class MackerelAgent < Formula
    EOS
   end
 
-  def caveats; <<-EOS.undent
+  def caveats; <<~EOS
     You must append `apikey = {apikey}` configuration variable to #{etc}/mackerel-agent.conf
     in order for mackerel-agent to work.
     EOS
