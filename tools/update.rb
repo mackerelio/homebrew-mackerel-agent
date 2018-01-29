@@ -3,6 +3,7 @@
 require "rubygems/version"
 require "open-uri"
 require "openssl"
+require 'json'
 
 class Formula
   BASE_DIR = File.dirname(File.expand_path("../", __FILE__)).freeze
@@ -11,9 +12,12 @@ class Formula
   URL_REGEXP     = /\A(\s*)url '([^']+)'\z/.freeze
   DIGEST_REGEXP  = /\A(\s*)sha256 '([a-fA-F0-9]+)'\z/.freeze
 
+  VERSION_TAG_REGEXP = /\Av((\d+)\.(\d+)\.(\d+))\z/.freeze
+
   attr_reader :name, :version, :path
 
   def initialize(name)
+    @owner = "mackerelio" # hard-coded
     @name = name
     @path = File.join(BASE_DIR, "#{name}.rb")
     raise "no such Formula" unless File.exist?(@path)
@@ -41,6 +45,13 @@ class Formula
     File.open(self.path, "wb") do |io|
       io.puts @body
     end
+  end
+
+  def find_latest_version
+    api_url = "https://api.github.com/repos/#{@owner}/#{@name}/releases/latest"
+    parsed = JSON.parse(open(api_url).read)
+    # remove `v` prefix
+    VERSION_TAG_REGEXP.match(parsed["name"]).to_a[1]
   end
 
   private
@@ -114,13 +125,20 @@ end
 
 def main(args)
   name = args[0].downcase
-  version_str = args[1]
+
+  formula = Formula.new(name)
+
+  if args[1] == "latest"
+    version_str = formula.find_latest_version
+  else
+    version_str = args[1]
+  end
+
   unless Gem::Version.correct?(version_str)
     abort "invalid version"
   end
   next_version = Gem::Version.create(version_str)
 
-  formula = Formula.new(name)
   begin
     formula.update(next_version)
   rescue => e
