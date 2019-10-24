@@ -1,13 +1,8 @@
 class MackerelAgent < Formula
   homepage 'https://github.com/mackerelio/mackerel-agent'
   version '0.63.0'
-  if Hardware::CPU.is_64_bit?
-    url 'https://github.com/mackerelio/mackerel-agent/releases/download/v0.63.0/mackerel-agent_darwin_amd64.zip'
-    sha256 '4f1146b5a2561cb993096ba02253ed05301fb2141422b929fb9e8bb8f0989beb'
-  else
-    url 'https://github.com/mackerelio/mackerel-agent/releases/download/v0.63.0/mackerel-agent_darwin_386.zip'
-    sha256 '7ba5e2439f9ac232762344e17fd6ebae020acbb30682173c60c9328373a41497'
-  end
+  url 'https://github.com/mackerelio/mackerel-agent/releases/download/v0.63.0/mackerel-agent_darwin_amd64.zip'
+  sha256 '4f1146b5a2561cb993096ba02253ed05301fb2141422b929fb9e8bb8f0989beb'
 
   head do
     url 'https://github.com/mackerelio/mackerel-agent.git'
