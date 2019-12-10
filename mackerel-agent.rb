@@ -47,6 +47,7 @@ class MackerelAgent < Formula
          <string>supervise</string>
          <string>-conf</string>
          <string>#{etc}/mackerel-agent.conf</string>
+         <string>-private-autoshutdown</string>
      </array>
      <key>RunAtLoad</key>
      <true/>
