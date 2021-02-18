@@ -1,0 +1,24 @@
+name: brew
+
+on:
+  repository_dispatch:
+    types: [release]
+
+jobs:
+  brew:
+    runs-on: macos-latest
+    steps:
+    - uses: actions/checkout@v2
+    - run: brew config
+
+    - run: ruby tools/update.rb ${{ github.event.client_payload.product }} latest
+      if: github.event.client_payload
+
+    - run: brew install ./${{ github.event.client_payload.product }}.rb
+      if: github.event.client_payload
+
+    - uses: stefanzweifel/git-auto-commit-action@v4.2.0
+      if: github.event.client_payload
+      with:
+        commit_message: Update ${{ github.event.client_payload.product }}
+
