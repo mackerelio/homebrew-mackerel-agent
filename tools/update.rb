@@ -97,7 +97,7 @@ class Formula
         DIGEST_REGEXP.match(digest_line) do
           url = match[2]
           print "  <---- download: #{url} ..."
-          digest = OpenSSL::Digest::SHA256.hexdigest(open(url).read)
+          digest = OpenSSL::Digest::SHA256.hexdigest(URI.open(url).read)
           puts "done"
           replace digest_line, DIGEST_REGEXP do |m|
             puts "  ----> #{m[2]} → #{digest}"
