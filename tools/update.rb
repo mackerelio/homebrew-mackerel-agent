@@ -49,7 +49,7 @@ class Formula
 
   def find_latest_version
     api_url = "https://api.github.com/repos/#{@owner}/#{@name}/releases/latest"
-    parsed = JSON.parse(open(api_url).read)
+    parsed = JSON.parse(URI.open(api_url).read)
     # remove `v` prefix
     VERSION_TAG_REGEXP.match(parsed["name"]).to_a[1]
   end
