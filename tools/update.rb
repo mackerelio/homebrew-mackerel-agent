@@ -49,7 +49,7 @@ class Formula
 
   def find_latest_version
     api_url = "https://api.github.com/repos/#{@owner}/#{@name}/releases/latest"
-    parsed = JSON.parse(open(api_url).read)
+    parsed = JSON.parse(URI.open(api_url).read)
     # remove `v` prefix
     VERSION_TAG_REGEXP.match(parsed["name"]).to_a[1]
   end
@@ -97,7 +97,7 @@ class Formula
         DIGEST_REGEXP.match(digest_line) do
           url = match[2]
           print "  <---- download: #{url} ..."
-          digest = OpenSSL::Digest::SHA256.hexdigest(open(url).read)
+          digest = OpenSSL::Digest::SHA256.hexdigest(URI.open(url).read)
           puts "done"
           replace digest_line, DIGEST_REGEXP do |m|
             puts "  ----> #{m[2]} → #{digest}"
