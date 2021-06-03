@@ -1,8 +1,8 @@
 class Mkr < Formula
   homepage 'https://github.com/mackerelio/mkr'
-  version '0.45.0'
-  url 'https://github.com/mackerelio/mkr/releases/download/v0.45.0/mkr_darwin_amd64.zip'
-  sha256 'e5445fbfad2c4310601446cb38ddc624c714f3419fbbf36b072254fb2d03285d'
+  version '0.45.1'
+  url 'https://github.com/mackerelio/mkr/releases/download/v0.45.1/mkr_darwin_amd64.zip'
+  sha256 '4098e08f8fcd410c3886dda0881af19ef581bd1057109290b4ed9403697f05bd'
 
   head do
     url 'https://github.com/mackerelio/mkr.git'
