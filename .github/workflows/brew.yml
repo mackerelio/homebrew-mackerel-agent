@@ -12,6 +12,8 @@ jobs:
     - run: brew config
 
     - run: ruby tools/update.rb ${{ github.event.client_payload.product }} latest
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       if: github.event.client_payload
 
     - run: brew install ./${{ github.event.client_payload.product }}.rb

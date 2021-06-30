@@ -7,6 +7,7 @@ require 'json'
 
 class Formula
   BASE_DIR = File.dirname(File.expand_path("../", __FILE__)).freeze
+  GITHUB_TOKEN = ENV["GITHUB_TOKEN"].freeze
 
   VERSION_REGEXP = /^(\s*)version\s'([^']+)'$/i.freeze
   URL_REGEXP     = /\A(\s*)url '([^']+)'\z/.freeze
@@ -49,7 +50,7 @@ class Formula
 
   def find_latest_version
     api_url = "https://api.github.com/repos/#{@owner}/#{@name}/releases/latest"
-    parsed = JSON.parse(URI.open(api_url).read)
+    parsed = JSON.parse(URI.open(api_url, "Authorization" => GITHUB_TOKEN.nil? ? nil : "Bearer #{GITHUB_TOKEN}").read)
     # remove `v` prefix
     VERSION_TAG_REGEXP.match(parsed["name"]).to_a[1]
   end
