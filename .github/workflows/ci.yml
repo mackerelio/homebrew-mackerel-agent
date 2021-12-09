@@ -1,0 +1,64 @@
+name: Formula
+
+on:
+  - push
+
+jobs:
+  test:
+    runs-on: macos-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        formula:
+          - mkr
+          - mackerel-agent
+    steps:
+      # https://github.com/Homebrew/actions/tree/master/setup-homebrew
+      # This will clone this repo into $(brew --repo "$GITHUB_REPOSITORY")
+      - name: Set up Homebrew
+        id: set-up-homebrew
+        uses: Homebrew/actions/setup-homebrew@master
+      - name: Cache Homebrew Bundler RubyGems
+        id: cache
+        uses: actions/cache@v1
+        with:
+          path: ${{ steps.set-up-homebrew.outputs.gems-path }}
+          key: ${{ runner.os }}-rubygems-${{ steps.set-up-homebrew.outputs.gems-hash }}
+          restore-keys: ${{ runner.os }}-rubygems-
+      - name: Install the Formula
+        run: brew install ${{ github.repository }}/${{ matrix.formula }}
+        shell: bash
+      - name: Test the Formula
+        run: brew test ${{ github.repository }}/${{ matrix.formula }}
+        shell: bash
+  test-HEAD:
+    name: test (HEAD)
+    runs-on: macos-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        formula:
+          - mkr
+          - mackerel-agent
+    steps:
+      # https://github.com/Homebrew/actions/tree/master/setup-homebrew
+      # This will clone this repo into $(brew --repo "$GITHUB_REPOSITORY")
+      - name: Set up Homebrew
+        id: set-up-homebrew
+        uses: Homebrew/actions/setup-homebrew@master
+      - name: Cache Homebrew Bundler RubyGems
+        id: cache
+        uses: actions/cache@v1
+        with:
+          path: ${{ steps.set-up-homebrew.outputs.gems-path }}
+          key: ${{ runner.os }}-rubygems-${{ steps.set-up-homebrew.outputs.gems-hash }}
+          restore-keys: ${{ runner.os }}-rubygems-
+      # there may be go@1.x installed and it conflicts with go
+      - name: Preinstall go
+        run: brew install go || brew link --overwrite go
+      - name: Install the Formula with --HEAD
+        run: brew install --HEAD ${{ github.repository }}/${{ matrix.formula }}
+        shell: bash
+      - name: Test the Formula
+        run: brew test ${{ github.repository }}/${{ matrix.formula }}
+        shell: bash
