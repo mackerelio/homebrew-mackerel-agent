@@ -32,7 +32,7 @@ class MackerelAgent < Formula
   end
 
   test do
-    system 'mackerel-agent', '-version'
+    system 'mackerel-agent', 'version'
   end
 
   plist_options :manual => "mackerel-agent -conf #{HOMEBREW_PREFIX}/etc/mackerel-agent.conf"
