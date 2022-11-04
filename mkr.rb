@@ -1,12 +1,12 @@
 class Mkr < Formula
   homepage 'https://github.com/mackerelio/mkr'
-  version '0.47.1'
+  version '0.47.2'
   if Hardware::CPU.arm?
-    url 'https://github.com/mackerelio/mkr/releases/download/v0.47.1/mkr_darwin_arm64.zip'
-    sha256 '8ff981b79b102a03c75ad2b08f8d7b8ef98fcf9feb78c911176766d0dbf4bfa2'
+    url 'https://github.com/mackerelio/mkr/releases/download/v0.47.2/mkr_darwin_arm64.zip'
+    sha256 '5650412d12ee9527c1a2a883847ea6d78d0844e8bfd3154809e981812edf905d'
   else
-    url 'https://github.com/mackerelio/mkr/releases/download/v0.47.1/mkr_darwin_amd64.zip'
-    sha256 '1db447a8e09f3756bf52c3bac6c9c201183e880d012ab2a76da4918b7bc74b8a'
+    url 'https://github.com/mackerelio/mkr/releases/download/v0.47.2/mkr_darwin_amd64.zip'
+    sha256 '14ebc47cf5fd78a6231b2265eb3ca1c7c7b4244256ecd57dade7d689b2489fd5'
   end
 
   head do
