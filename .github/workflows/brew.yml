@@ -8,7 +8,7 @@ jobs:
   brew:
     runs-on: macos-latest
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
     - run: brew config
 
     - run: ruby tools/update.rb ${{ github.event.client_payload.product }} latest
