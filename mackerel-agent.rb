@@ -32,34 +32,12 @@ class MackerelAgent < Formula
     system 'mackerel-agent', 'version'
   end
 
-  plist_options :manual => "mackerel-agent -conf #{HOMEBREW_PREFIX}/etc/mackerel-agent.conf"
-
-  def plist; <<~EOS
-   <?xml version="1.0" encoding="UTF-8"?>
-   <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-   <plist version="1.0">
-   <dict>
-     <key>KeepAlive</key>
-     <true/>
-     <key>Label</key>
-     <string>#{plist_name}</string>
-     <key>ProgramArguments</key>
-     <array>
-         <string>#{opt_bin}/mackerel-agent</string>
-         <string>supervise</string>
-         <string>-conf</string>
-         <string>#{etc}/mackerel-agent.conf</string>
-         <string>-private-autoshutdown</string>
-     </array>
-     <key>RunAtLoad</key>
-     <true/>
-     <key>WorkingDirectory</key>
-     <string>#{var}/mackerel-agent</string>
-     <key>StandardErrorPath</key>
-     <string>#{var}/log/mackerel-agent.log</string>
-   </dict>
-   </plist>
-   EOS
+  service do
+    run ["#{opt_bin}/mackerel-agent", 'supervise', '-conf', "#{etc}/mackerel-agent.conf", '-private-autoshutdown']
+    require_root true
+    keep_alive true
+    working_dir "#{var}/mackerel-agent"
+    error_log_path "#{var}/log/mackerel-agent.log"
   end
 
   def caveats; <<~EOS
