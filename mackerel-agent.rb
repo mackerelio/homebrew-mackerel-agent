@@ -34,7 +34,6 @@ class MackerelAgent < Formula
 
   service do
     run ["#{opt_bin}/mackerel-agent", 'supervise', '-conf', "#{etc}/mackerel-agent.conf", '-private-autoshutdown']
-    require_root true
     keep_alive true
     working_dir "#{var}/mackerel-agent"
     error_log_path "#{var}/log/mackerel-agent.log"
