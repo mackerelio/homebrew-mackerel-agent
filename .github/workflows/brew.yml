@@ -19,7 +19,7 @@ jobs:
     - run: brew install ./${{ github.event.client_payload.product }}.rb
       if: github.event.client_payload
 
-    - uses: stefanzweifel/git-auto-commit-action@v5.0.1
+    - uses: stefanzweifel/git-auto-commit-action@v5.1.0
       if: github.event.client_payload
       with:
         commit_message: Update ${{ github.event.client_payload.product }}
