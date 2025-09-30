@@ -18,6 +18,8 @@ jobs:
 
     - run: brew install ./${{ github.event.client_payload.product }}.rb
       if: github.event.client_payload
+      env:
+        HOMEBREW_DEVELOPER: true
 
     - uses: stefanzweifel/git-auto-commit-action@v5.0.1
       if: github.event.client_payload
