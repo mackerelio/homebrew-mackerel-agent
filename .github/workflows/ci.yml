@@ -25,6 +25,7 @@ jobs:
           path: ${{ steps.set-up-homebrew.outputs.gems-path }}
           key: ${{ runner.os }}-rubygems-${{ steps.set-up-homebrew.outputs.gems-hash }}
           restore-keys: ${{ runner.os }}-rubygems-
+      - run: brew trust ${{ github.repository }}/${{ matrix.formula }}
       - name: Install the Formula
         run: brew install ${{ github.repository }}/${{ matrix.formula }}
         shell: bash
@@ -56,6 +57,7 @@ jobs:
       # there may be go@1.x installed and it conflicts with go
       - name: Preinstall go
         run: brew install go || brew link --overwrite go
+      - run: brew trust ${{ github.repository }}/${{ matrix.formula }}
       - name: Install the Formula with --HEAD
         run: brew install --HEAD ${{ github.repository }}/${{ matrix.formula }}
         shell: bash
