@@ -20,7 +20,7 @@ jobs:
         uses: Homebrew/actions/setup-homebrew@8c478e7f5c2c2df9efba834a3568d4fe35cdb2a3
       - name: Cache Homebrew Bundler RubyGems
         id: cache
-        uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae # v5.0.5
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
         with:
           path: ${{ steps.set-up-homebrew.outputs.gems-path }}
           key: ${{ runner.os }}-rubygems-${{ steps.set-up-homebrew.outputs.gems-hash }}
@@ -49,7 +49,7 @@ jobs:
         uses: Homebrew/actions/setup-homebrew@8c478e7f5c2c2df9efba834a3568d4fe35cdb2a3
       - name: Cache Homebrew Bundler RubyGems
         id: cache
-        uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae # v5.0.5
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
         with:
           path: ${{ steps.set-up-homebrew.outputs.gems-path }}
           key: ${{ runner.os }}-rubygems-${{ steps.set-up-homebrew.outputs.gems-hash }}
