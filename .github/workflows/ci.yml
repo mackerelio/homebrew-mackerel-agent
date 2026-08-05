@@ -17,7 +17,7 @@ jobs:
       # This will clone this repo into $(brew --repo "$GITHUB_REPOSITORY")
       - name: Set up Homebrew
         id: set-up-homebrew
-        uses: Homebrew/actions/setup-homebrew@9af03b7ae3f9e2ae5c174f659d5c3909f7e7dbac
+        uses: Homebrew/actions/setup-homebrew@5037c6f1012cc5ea0b9f03fedbaf9955ed9e51e0
       - name: Cache Homebrew Bundler RubyGems
         id: cache
         uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
@@ -46,7 +46,7 @@ jobs:
       # This will clone this repo into $(brew --repo "$GITHUB_REPOSITORY")
       - name: Set up Homebrew
         id: set-up-homebrew
-        uses: Homebrew/actions/setup-homebrew@9af03b7ae3f9e2ae5c174f659d5c3909f7e7dbac
+        uses: Homebrew/actions/setup-homebrew@5037c6f1012cc5ea0b9f03fedbaf9955ed9e51e0
       - name: Cache Homebrew Bundler RubyGems
         id: cache
         uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
